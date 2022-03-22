@@ -23,7 +23,7 @@ public class Player {
 
         this.name = name;
 
-        type = ""
+        type = "Player";
     }
 
 }

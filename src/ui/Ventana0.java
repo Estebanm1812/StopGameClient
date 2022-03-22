@@ -1,5 +1,6 @@
 package ui;
 
+import com.google.gson.Gson;
 import conn.Sesion;
 import events.OnMessageWaiting;
 import events.OnSearchingListener;
@@ -11,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Generic;
 import model.Player;
 
 import java.io.IOException;
@@ -73,7 +75,14 @@ public class Ventana0 implements OnSearchingListener {
 
         String msg = waiting.waitingMessage();
 
-        if(msg.equals(""))
+        Gson gson = new Gson();
+
+        if(msg.startsWith("{")){
+
+            Generic generic = gson.fromJson(msg,Generic.class);
+
+
+        }
 
 
     }
