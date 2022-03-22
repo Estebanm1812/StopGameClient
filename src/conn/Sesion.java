@@ -1,14 +1,16 @@
 package conn;
 
+import events.OnMessageWaiting;
 import events.OnSearchingListener;
 import javafx.application.Platform;
 import model.Player;
+import ui.Ventana0;
 
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 
-public class Sesion extends Thread{
+public class Sesion extends Thread implements OnMessageWaiting {
 
     private Player player;
 
@@ -23,6 +25,10 @@ public class Sesion extends Thread{
     private BufferedWriter bw;
 
     private OnSearchingListener searching;
+
+    private BufferedReader br;
+
+    private Ventana0 windows0;
 
     public static synchronized Sesion getInstance(Player player){
 
@@ -54,13 +60,15 @@ public class Sesion extends Thread{
 
 
             InputStream is = socket.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            br = new BufferedReader(new InputStreamReader(is));
 
 
             //bwListener.bufferedWritterReady(option);
 
 
             //String msg = br.readLine();
+
+
             Platform.runLater(()->{
                 searching.OnSearching();
             });
@@ -105,4 +113,20 @@ public class Sesion extends Thread{
         this.searching = searching;
     }
 
+    @Override
+    public String waitingMessage() {
+
+        String message = " ";
+        try {
+            message = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+    public void setWindows0(Ventana0 windows0) {
+        this.windows0 = windows0;
+    }
 }

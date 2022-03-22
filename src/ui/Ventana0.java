@@ -1,6 +1,7 @@
 package ui;
 
 import conn.Sesion;
+import events.OnMessageWaiting;
 import events.OnSearchingListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +16,8 @@ import model.Player;
 import java.io.IOException;
 
 public class Ventana0 implements OnSearchingListener {
+
+    private OnMessageWaiting waiting;
 
     @FXML
     public AnchorPane windows0AnchorPane;
@@ -37,6 +40,8 @@ public class Ventana0 implements OnSearchingListener {
             Sesion sesion = Sesion.getInstance(player);
 
             sesion.setOnSerchinglistener(this);
+            sesion.setWindows0(this);
+
 
             sesion.run();
 
@@ -66,7 +71,15 @@ public class Ventana0 implements OnSearchingListener {
             e.printStackTrace();
         }
 
+        String msg = waiting.waitingMessage();
+
+        if(msg.equals(""))
 
 
+    }
+
+    private void setOnMessageWaiting(OnMessageWaiting waiting){
+
+        this.waiting = waiting;
     }
 }

@@ -4,6 +4,8 @@ public class Player {
 
     private static Player instance;
 
+    private String type;
+
     private String name;
 
     //private int playedGames;
@@ -21,6 +23,7 @@ public class Player {
 
         this.name = name;
 
+        type = ""
     }
 
 }
