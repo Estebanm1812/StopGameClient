@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.GameInformation;
 import model.Generic;
 import model.Message;
 import model.Player;
@@ -25,6 +26,10 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
     private OnMessageWaiting waiting;
 
     private static Sesion sesion;
+
+    private GameInformation game;
+
+    private Stage stageToShare;
 
     @FXML
     public AnchorPane windows0AnchorPane;
@@ -75,6 +80,7 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
             Scene scene = new Scene(loadingPane);
             Stage stage = (Stage) windows0AnchorPane.getScene().getWindow();
 
+            stageToShare = stage;
             stage.setScene(scene);
             stage.show();
 
@@ -125,7 +131,6 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
     public void waitMessage(){
 
-        System.out.println("Entro aqui");
 
         Platform.runLater(()->{
 
@@ -146,30 +151,58 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
         System.out.println(msgMain + "Esto esta leyendo" );
 
-         /*
             Gson gson = new Gson();
 
-            if(msg.startsWith("{")){
+            String[] parts = msgMain.split("//");
 
-                Generic generic = gson.fromJson(msg,Generic.class);
+            if(parts[0].startsWith("{")) {
 
-                Message m = gson.fromJson(msg,Message.class);
+                Generic generic = gson.fromJson(parts[0], Generic.class);
 
-                if(m.getMessage().equals("sendPlayer")){
+                switch (generic.type) {
 
-                    Player p = sesion.getPlayer();
+                    case "Message":
 
-                    Gson g = new Gson();
+                    Message m = gson.fromJson(parts[0], Message.class);
 
-                    String message = gson.toJson(p);
+                    switch (m.getMessage()) {
 
-                    sesion.sendMessage(message);
+                        case "sendPlayer":
+                            Player p = sesion.getPlayer();
 
+                            Gson g = new Gson();
+
+                            String message = gson.toJson(p);
+
+                            sesion.sendMessage(message);
+
+                            waiting.waitingMessage();
+
+                            break;
+
+                    }
+                    break;
+
+                    case "Player":
+
+                        Player rival = gson.fromJson(parts[0], Player.class);
+
+                        game = new GameInformation(rival, parts[1]);
+
+                        //System.out.println(parts[0]);
+
+                        loadGame();
+
+                        break;
 
                 }
 
             }
-            */
+    }
+
+    public void loadGame() {
+
+        VentanaA windowsA = new VentanaA(game,stageToShare,sesion,this);
 
     }
 }
