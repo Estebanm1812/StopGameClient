@@ -70,16 +70,12 @@ public class Sesion extends Thread implements OnMessageWaiting {
 
 
             Platform.runLater(()->{
+
                 searching.OnSearching();
+
             });
 
-            //rttReciber.onMessageReceived();
-            //answer.MessageReceived(msg);
-            try {
-                socket.close();
-            } catch (SocketException e) {
-                e.printStackTrace();
-            }
+
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -116,17 +112,15 @@ public class Sesion extends Thread implements OnMessageWaiting {
     @Override
     public String waitingMessage() {
 
-        String message = " ";
-        try {
-            message = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        return message;
+
     }
 
     public void setWindows0(Ventana0 windows0) {
         this.windows0 = windows0;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

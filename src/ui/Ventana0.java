@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Generic;
+import model.Message;
 import model.Player;
 
 import java.io.IOException;
@@ -20,6 +21,8 @@ import java.io.IOException;
 public class Ventana0 implements OnSearchingListener {
 
     private OnMessageWaiting waiting;
+
+    private static Sesion sesion;
 
     @FXML
     public AnchorPane windows0AnchorPane;
@@ -39,13 +42,15 @@ public class Ventana0 implements OnSearchingListener {
         if(name.trim().isEmpty()==false){
             Player player = Player.getInstance(name);
 
-            Sesion sesion = Sesion.getInstance(player);
+            sesion = Sesion.getInstance(player);
 
+            setOnMessageWaiting(sesion);
             sesion.setOnSerchinglistener(this);
             sesion.setWindows0(this);
 
 
-            sesion.run();
+
+            sesion.start();
 
 
         }
@@ -57,6 +62,7 @@ public class Ventana0 implements OnSearchingListener {
     @Override
     public void OnSearching(){
 
+       // System.out.println("Entra");
         FXMLLoader fxmload = new FXMLLoader(getClass().getResource("VentanaDeCargar.fxml"));
 
         Parent loadingPane;
@@ -73,6 +79,8 @@ public class Ventana0 implements OnSearchingListener {
             e.printStackTrace();
         }
 
+        waitMessage();
+        /*
         String msg = waiting.waitingMessage();
 
         Gson gson = new Gson();
@@ -81,9 +89,23 @@ public class Ventana0 implements OnSearchingListener {
 
             Generic generic = gson.fromJson(msg,Generic.class);
 
+            Message m = gson.fromJson(msg,Message.class);
+
+            if(m.getMessage().equals("sendPlayer")){
+
+                Player p = sesion.getPlayer();
+
+                Gson g = new Gson();
+
+                String message = gson.toJson(p);
+
+                sesion.sendMessage(message);
+
+
+            }
 
         }
-
+        */
 
     }
 
@@ -91,4 +113,34 @@ public class Ventana0 implements OnSearchingListener {
 
         this.waiting = waiting;
     }
+
+    public void waitMessage(){
+
+        String msg = waiting.waitingMessage();
+
+        Gson gson = new Gson();
+
+        if(msg.startsWith("{")){
+
+            Generic generic = gson.fromJson(msg,Generic.class);
+
+            Message m = gson.fromJson(msg,Message.class);
+
+            if(m.getMessage().equals("sendPlayer")){
+
+                Player p = sesion.getPlayer();
+
+                Gson g = new Gson();
+
+                String message = gson.toJson(p);
+
+                sesion.sendMessage(message);
+
+
+            }
+
+        }
+
+    }
+
 }
