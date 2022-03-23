@@ -2,6 +2,6 @@ package events;
 
 public interface OnMessageWaiting {
 
-    String waitingMessage();
+    void waitingMessage();
 
 }

@@ -1,5 +1,6 @@
 package conn;
 
+import events.OnMessageReceived;
 import events.OnMessageWaiting;
 import events.OnSearchingListener;
 import javafx.application.Platform;
@@ -30,6 +31,10 @@ public class Sesion extends Thread implements OnMessageWaiting {
 
     private Ventana0 windows0;
 
+    private OnMessageReceived received;
+
+    public String msg;
+
     public static synchronized Sesion getInstance(Player player){
 
 
@@ -44,6 +49,8 @@ public class Sesion extends Thread implements OnMessageWaiting {
     private Sesion(Player player){
 
         this.player = player;
+
+        msg = null;
     }
 
     @Override
@@ -110,7 +117,28 @@ public class Sesion extends Thread implements OnMessageWaiting {
     }
 
     @Override
-    public String waitingMessage() {
+    public void waitingMessage() {
+
+
+        new Thread(() -> {
+
+            try {
+                while(msg==null || msg.isEmpty() ) {
+                    System.out.println("Entre al while");
+                    msg = br.readLine();
+                    System.out.println("Lei algo");
+
+                    windows0.msgMain=msg;
+
+
+                }
+                received.onMessageReceived();
+
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }).start();
 
 
 

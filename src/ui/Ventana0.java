@@ -2,8 +2,10 @@ package ui;
 
 import com.google.gson.Gson;
 import conn.Sesion;
+import events.OnMessageReceived;
 import events.OnMessageWaiting;
 import events.OnSearchingListener;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +20,7 @@ import model.Player;
 
 import java.io.IOException;
 
-public class Ventana0 implements OnSearchingListener {
+public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
     private OnMessageWaiting waiting;
 
@@ -32,6 +34,8 @@ public class Ventana0 implements OnSearchingListener {
 
     @FXML
     public AnchorPane loadingAnchorPane;
+
+    public String msgMain = "";
 
     @FXML
     void searchGame(ActionEvent event) {
@@ -79,7 +83,12 @@ public class Ventana0 implements OnSearchingListener {
             e.printStackTrace();
         }
 
-        waitMessage();
+        Platform.runLater(()->{
+
+            waitMessage();
+
+        });
+
         /*
         String msg = waiting.waitingMessage();
 
@@ -116,31 +125,51 @@ public class Ventana0 implements OnSearchingListener {
 
     public void waitMessage(){
 
-        String msg = waiting.waitingMessage();
+        System.out.println("Entro aqui");
 
-        Gson gson = new Gson();
+        Platform.runLater(()->{
 
-        if(msg.startsWith("{")){
-
-            Generic generic = gson.fromJson(msg,Generic.class);
-
-            Message m = gson.fromJson(msg,Message.class);
-
-            if(m.getMessage().equals("sendPlayer")){
-
-                Player p = sesion.getPlayer();
-
-                Gson g = new Gson();
-
-                String message = gson.toJson(p);
-
-                sesion.sendMessage(message);
+            waiting.waitingMessage();
 
 
-            }
 
-        }
+
+        });
+
 
     }
 
+    @Override
+    public void onMessageReceived() {
+
+        sesion.msg = null;
+
+        System.out.println(msgMain + "Esto esta leyendo" );
+
+         /*
+            Gson gson = new Gson();
+
+            if(msg.startsWith("{")){
+
+                Generic generic = gson.fromJson(msg,Generic.class);
+
+                Message m = gson.fromJson(msg,Message.class);
+
+                if(m.getMessage().equals("sendPlayer")){
+
+                    Player p = sesion.getPlayer();
+
+                    Gson g = new Gson();
+
+                    String message = gson.toJson(p);
+
+                    sesion.sendMessage(message);
+
+
+                }
+
+            }
+            */
+
+    }
 }
