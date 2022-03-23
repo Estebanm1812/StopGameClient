@@ -1,5 +1,6 @@
 package ui;
 
+import com.google.gson.Gson;
 import conn.Sesion;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Answer;
 import model.GameInformation;
+import model.Player;
 
 import java.io.IOException;
 
@@ -41,10 +43,13 @@ public class VentanaA {
     @FXML
     private TextField objectAnswer;
 
+    private Stage stage;
+
     public VentanaA(GameInformation game, Stage stage, Sesion sesion,Ventana0 ventana0){
 
         this.ventana0 = ventana0;
 
+        this.stage = stage;
         //this.windows0AnchorPane = windows0AnchorPane;
 
         this.sesion = sesion;
@@ -71,14 +76,18 @@ public class VentanaA {
                 e.printStackTrace();
             }
 
-            ventana0.waitMessage();
 
+            new Thread(() -> {
+            ventana0.waitMessage();
+            });
 
         });
 
     }
     @FXML
     void stopGame(ActionEvent event) {
+
+        System.out.println("El boton funciona");
 
         String name = nameAnswer.getText();
 
@@ -88,8 +97,25 @@ public class VentanaA {
 
         String thing = objectAnswer.getText();
 
-        
+        if(name==null || animal==null || city==null || thing==null) {
 
+        }else{
+
+            Answer ownAnswer = new Answer(name,animal,city,thing);
+
+            Gson g = new Gson();
+
+            String message = g.toJson(ownAnswer);
+
+            System.out.println(message);
+
+            sesion.sendMessage(message);
+
+            VentanaB windowsB = new VentanaB(game,stage);
+
+
+
+        }
     }
 
 

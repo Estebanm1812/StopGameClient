@@ -124,9 +124,8 @@ public class Sesion extends Thread implements OnMessageWaiting {
 
             try {
                 while(msg==null || msg.isEmpty() ) {
-                    System.out.println("Entre al while");
+
                     msg = br.readLine();
-                    System.out.println("Lei algo");
 
                     windows0.msgMain=msg;
 

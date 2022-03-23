@@ -26,4 +26,7 @@ public class Player {
         type = "Player";
     }
 
+    public String getName() {
+        return name;
+    }
 }

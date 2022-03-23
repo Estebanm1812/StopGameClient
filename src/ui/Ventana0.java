@@ -14,10 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.GameInformation;
-import model.Generic;
-import model.Message;
-import model.Player;
+import model.*;
 
 import java.io.IOException;
 
@@ -132,6 +129,7 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
     public void waitMessage(){
 
 
+
         Platform.runLater(()->{
 
             waiting.waitingMessage();
@@ -142,6 +140,7 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
         });
 
 
+
     }
 
     @Override
@@ -149,7 +148,7 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
         sesion.msg = null;
 
-        System.out.println(msgMain + "Esto esta leyendo" );
+        System.out.println(msgMain);
 
             Gson gson = new Gson();
 
@@ -187,14 +186,27 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
                         Player rival = gson.fromJson(parts[0], Player.class);
 
-                        game = new GameInformation(rival, parts[1]);
+                        game = new GameInformation(rival, parts[1],sesion.getPlayer());
 
                         //System.out.println(parts[0]);
 
                         loadGame();
 
                         break;
+                    case "Answer":{
 
+                        Answer answerRival = gson.fromJson(parts[0], Answer.class);
+
+                        game.setRivalAnswer(answerRival);
+
+                        Platform.runLater(()->{
+
+                            VentanaB windowsB = new VentanaB(game,stageToShare);
+
+
+                        });
+
+                    }
                 }
 
             }
