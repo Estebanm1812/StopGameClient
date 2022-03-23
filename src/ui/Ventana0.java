@@ -51,7 +51,7 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
             setOnMessageWaiting(sesion);
             sesion.setOnSerchinglistener(this);
             sesion.setWindows0(this);
-
+            sesion.setReceived(this);
 
 
             sesion.start();

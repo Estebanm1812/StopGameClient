@@ -151,4 +151,8 @@ public class Sesion extends Thread implements OnMessageWaiting {
     public Player getPlayer() {
         return player;
     }
+
+    public void setReceived(OnMessageReceived received) {
+        this.received = received;
+    }
 }
