@@ -1,5 +1,6 @@
 package ui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,6 +21,8 @@ public class VentanaB {
     private Stage stage;
 
     private GameInformation game;
+
+    private Ventana0 windows0;
 
     @FXML
     private Label youLabel;
@@ -51,12 +54,18 @@ public class VentanaB {
     @FXML
     private Label opponentObjectResult;
 
+    @FXML
+    private Label ownPoints;
 
-    public VentanaB(GameInformation game, Stage stage){
+    @FXML
+    private Label rivalPoints;
+
+
+    public VentanaB(GameInformation game, Stage stage, Ventana0 windows0){
 
         this.game = game;
         this.stage = stage;
-
+        this.windows0 = windows0;
 
 
     }
@@ -72,6 +81,7 @@ public class VentanaB {
 
             stage.setScene(scene);
             stage.show();
+            game.calculatePoints();
 
             ownNameResult.setText(game.getOwnAnswer().getName_lastName());
             ownAnimalResult.setText(game.getOwnAnswer().getAnimal());
@@ -86,10 +96,21 @@ public class VentanaB {
             youLabel.setText(game.getSelf().getName());
             opponentLabel.setText(game.getRival().getName());
 
+            ownPoints.setText(String.valueOf(game.getOwnPoints()));
+            rivalPoints.setText(String.valueOf(game.getRivalPoints()));
+
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void finishGame(ActionEvent event) {
+
+       stage.close();
+
+
     }
 
 }

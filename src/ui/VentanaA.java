@@ -145,7 +145,7 @@ public class VentanaA {
             Platform.runLater( ()->{
 
                 ventana0.waitMessage();
-                VentanaB windowsB = new VentanaB(game,stage);
+                VentanaB windowsB = new VentanaB(game,stage,ventana0);
                 windowsB.updateScreen();
             });
 

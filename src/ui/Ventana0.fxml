@@ -6,10 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="windows0AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.Ventana0">
+<AnchorPane fx:id="windows0AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #98C1C7;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.Ventana0">
    <children>
-      <TextField fx:id="nameField" layoutX="133.0" layoutY="150.0" prefHeight="26.0" prefWidth="363.0" />
+      <TextField fx:id="nameField" layoutX="133.0" layoutY="150.0" prefHeight="26.0" prefWidth="363.0" style="-fx-border-color: black;" />
       <Label layoutX="206.0" layoutY="88.0" prefHeight="23.0" prefWidth="200.0" text="Inserte su Nombre">
          <font>
             <Font name="Times New Roman Bold Italic" size="24.0" />

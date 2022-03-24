@@ -30,6 +30,8 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
     private Stage stageToShare;
 
+
+
     @FXML
     public AnchorPane windows0AnchorPane;
 
@@ -231,7 +233,7 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
                         Platform.runLater(()->{
 
 
-                            VentanaB windowsB = new VentanaB(game,stageToShare);
+                            VentanaB windowsB = new VentanaB(game,stageToShare,this);
                             windowsB.updateScreen();
 
                         });
