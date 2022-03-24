@@ -190,16 +190,34 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
                         //System.out.println(parts[0]);
 
+                        new Thread(() -> {
+
+
+                            Platform.runLater( ()->{
+
+                                waitMessage();
+
+
+
+                            });
+
+
+                        }).start();
+
                         loadGame();
 
                         break;
                     case "Answer":{
 
+
+                        System.out.println("Entra al answer");
                         Answer answerRival = gson.fromJson(parts[0], Answer.class);
+                        System.out.println("Paso del gson");
 
                         game.setRivalAnswer(answerRival);
 
                         Platform.runLater(()->{
+
 
                             VentanaB windowsB = new VentanaB(game,stageToShare);
 

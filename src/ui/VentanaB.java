@@ -17,6 +17,8 @@ public class VentanaB {
 
     private Answer rivalAnswer;
 
+    private Stage stage;
+
     private GameInformation game;
 
     @FXML
@@ -50,9 +52,15 @@ public class VentanaB {
     private Label opponentObjectResult;
 
 
-    public VentanaB(GameInformation game, Stage stageToShare){
+    public VentanaB(GameInformation game, Stage stage){
 
         this.game = game;
+        this.stage = stage;
+
+
+
+    }
+    public void updateScreen(){
 
         FXMLLoader fxmlA = new FXMLLoader(getClass().getResource("VentanaB.fxml"));
 
@@ -62,8 +70,8 @@ public class VentanaB {
             loadingPane = (Parent) fxmlA.load();
             Scene scene = new Scene(loadingPane);
 
-            stageToShare.setScene(scene);
-            stageToShare.show();
+            stage.setScene(scene);
+            stage.show();
 
             ownNameResult.setText(game.getOwnAnswer().getName_lastName());
             ownAnimalResult.setText(game.getOwnAnswer().getAnimal());
@@ -82,7 +90,6 @@ public class VentanaB {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
 }

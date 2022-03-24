@@ -87,8 +87,6 @@ public class VentanaA {
     @FXML
     void stopGame(ActionEvent event) {
 
-        System.out.println("El boton funciona");
-
         String name = nameAnswer.getText();
 
         String animal = animalAnswer.getText();
@@ -99,9 +97,12 @@ public class VentanaA {
 
         if(name==null || animal==null || city==null || thing==null) {
 
+
         }else{
 
             Answer ownAnswer = new Answer(name,animal,city,thing);
+
+            game.setOwnAnswer(ownAnswer);
 
             Gson g = new Gson();
 
@@ -111,11 +112,48 @@ public class VentanaA {
 
             sesion.sendMessage(message);
 
-            VentanaB windowsB = new VentanaB(game,stage);
-
 
 
         }
+    }
+    public void forceUpdate(){
+
+        String name = nameAnswer.getText();
+
+        String animal = animalAnswer.getText();
+
+        String city = locationAnswer.getText();
+
+        String thing = objectAnswer.getText();
+
+
+            Answer ownAnswer = new Answer(name,animal,city,thing);
+
+            game.setOwnAnswer(ownAnswer);
+
+            Gson g = new Gson();
+
+            String message = g.toJson(ownAnswer);
+
+            System.out.println(message);
+
+            sesion.sendMessage(message);
+
+            Platform.runLater( ()->{
+
+                ventana0.waitMessage();
+                VentanaB windowsB = new VentanaB(game,stage);
+                windowsB.updateScreen();
+            });
+
+
+
+
+
+
+
+
+
     }
 
 

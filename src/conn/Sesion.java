@@ -125,6 +125,7 @@ public class Sesion extends Thread implements OnMessageWaiting {
             try {
                 while(msg==null || msg.isEmpty() ) {
 
+                    System.out.println("Espera en el readLine");
                     msg = br.readLine();
 
                     windows0.msgMain=msg;
