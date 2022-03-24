@@ -1,5 +1,8 @@
 package ui;
 
+import com.google.gson.Gson;
+import conn.Sesion;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.Answer;
 import model.GameInformation;
+import model.Message;
 
 import java.io.IOException;
 
@@ -23,6 +27,8 @@ public class VentanaB {
     private GameInformation game;
 
     private Ventana0 windows0;
+
+    private Sesion sesion;
 
     @FXML
     private Label youLabel;
@@ -61,12 +67,12 @@ public class VentanaB {
     private Label rivalPoints;
 
 
-    public VentanaB(GameInformation game, Stage stage, Ventana0 windows0){
+    public VentanaB(GameInformation game, Stage stage, Ventana0 windows0,Sesion sesion){
 
         this.game = game;
         this.stage = stage;
         this.windows0 = windows0;
-
+        this.sesion = sesion;
 
     }
     public void updateScreen(){
@@ -108,9 +114,19 @@ public class VentanaB {
     @FXML
     void finishGame(ActionEvent event) {
 
-       stage.close();
+        Message m = new Message("gameEnded");
 
+        Gson gson = new Gson();
 
+        String msg = gson.toJson(m);
+
+        sesion.sendMessage(msg);
+
+        Platform.runLater(()->{
+
+        windows0.returnSearching(stage);
+
+        });
     }
 
 }

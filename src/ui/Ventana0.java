@@ -125,6 +125,33 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
     }
 
+    public void returnSearching(Stage stage){
+
+        FXMLLoader fxmload = new FXMLLoader(getClass().getResource("VentanaDeCargar.fxml"));
+
+        Parent loadingPane;
+        try {
+            loadingPane = (Parent) fxmload.load();
+            Scene scene = new Scene(loadingPane);
+            //Stage stage = (Stage) windows0AnchorPane.getScene().getWindow();
+
+            //stageToShare = stage;
+            stage.setScene(scene);
+            stage.show();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Platform.runLater(()->{
+
+            waitMessage();
+
+        });
+
+    }
+
     private void setOnMessageWaiting(OnMessageWaiting waiting){
 
         this.waiting = waiting;
@@ -233,7 +260,7 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
                         Platform.runLater(()->{
 
 
-                            VentanaB windowsB = new VentanaB(game,stageToShare,this);
+                            VentanaB windowsB = new VentanaB(game,stageToShare,this,sesion);
                             windowsB.updateScreen();
 
                         });

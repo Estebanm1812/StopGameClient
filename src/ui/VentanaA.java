@@ -95,7 +95,7 @@ public class VentanaA {
 
         String thing = objectAnswer.getText();
 
-        if(name==null || animal==null || city==null || thing==null) {
+        if(name.isEmpty() || animal.isEmpty() || city.isEmpty() || thing.isEmpty()) {
 
 
         }else{
@@ -145,7 +145,7 @@ public class VentanaA {
             Platform.runLater( ()->{
 
                 ventana0.waitMessage();
-                VentanaB windowsB = new VentanaB(game,stage,ventana0);
+                VentanaB windowsB = new VentanaB(game,stage,ventana0,sesion);
                 windowsB.updateScreen();
             });
 
