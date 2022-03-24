@@ -112,6 +112,8 @@ public class VentanaA {
 
             sesion.sendMessage(message);
 
+            ventana0.waitMessage();
+
 
 
         }
@@ -153,6 +155,21 @@ public class VentanaA {
 
 
 
+
+    }
+    public Answer getCurrentAnswers(){
+
+        String name = nameAnswer.getText();
+
+        String animal = animalAnswer.getText();
+
+        String city = locationAnswer.getText();
+
+        String thing = objectAnswer.getText();
+
+        Answer ownAnswer = new Answer(name,animal,city,thing);
+
+        return ownAnswer;
 
     }
 

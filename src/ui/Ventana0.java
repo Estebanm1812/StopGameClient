@@ -26,6 +26,8 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
     private GameInformation game;
 
+    private VentanaA windowsA;
+
     private Stage stageToShare;
 
     @FXML
@@ -216,11 +218,17 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
                         game.setRivalAnswer(answerRival);
 
+                        System.out.println(game.getRivalAnswer().getAnimal());
+
+                        Answer own = windowsA.getCurrentAnswers();
+
+                        game.setOwnAnswer(own);
+
                         Platform.runLater(()->{
 
 
                             VentanaB windowsB = new VentanaB(game,stageToShare);
-
+                            windowsB.updateScreen();
 
                         });
 
@@ -232,7 +240,7 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
     public void loadGame() {
 
-        VentanaA windowsA = new VentanaA(game,stageToShare,sesion,this);
+        windowsA = new VentanaA(game,stageToShare,sesion,this);
 
     }
 }
