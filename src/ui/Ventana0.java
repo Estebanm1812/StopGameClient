@@ -222,6 +222,10 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
                         Answer own = windowsA.getCurrentAnswers();
 
+                        String toSend = gson.toJson(own);
+
+                        sesion.sendMessage(toSend);
+
                         game.setOwnAnswer(own);
 
                         Platform.runLater(()->{
