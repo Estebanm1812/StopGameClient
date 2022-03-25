@@ -155,4 +155,18 @@ public class Sesion extends Thread implements OnMessageWaiting {
     public void setReceived(OnMessageReceived received) {
         this.received = received;
     }
+
+    public void resetSesion(){
+
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void setInstance() {
+        instance = null;
+    }
 }

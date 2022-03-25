@@ -30,7 +30,7 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
     private Stage stageToShare;
 
-
+    //private Player playerOWN;
 
     @FXML
     public AnchorPane windows0AnchorPane;
@@ -50,7 +50,8 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
 
         if(name.trim().isEmpty()==false){
-            Player player = Player.getInstance(name);
+            Player player = new Player(name);
+            //playerOWN = player;
 
             sesion = Sesion.getInstance(player);
 
@@ -67,7 +68,20 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
 
     }
+    /*
+    public void searchAgain(Player player){
 
+        sesion = Sesion.getInstance(player);
+
+        setOnMessageWaiting(sesion);
+        sesion.setOnSerchinglistener(this);
+        sesion.setWindows0(this);
+        sesion.setReceived(this);
+
+
+        sesion.start();
+    }
+    */
 
     @Override
     public void OnSearching(){
@@ -125,15 +139,25 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
     }
 
-    public void returnSearching(Stage stage){
+    public void finishProgram(Stage stage){
 
+
+
+         //Player own = sesion.getPlayer();
+
+        //sesion.resetSesion();
+        stage.close();
+
+        //sesion.start();
+    }
+    public void returnToSearchin(Stage stage){
         FXMLLoader fxmload = new FXMLLoader(getClass().getResource("VentanaDeCargar.fxml"));
 
         Parent loadingPane;
         try {
             loadingPane = (Parent) fxmload.load();
             Scene scene = new Scene(loadingPane);
-            //Stage stage = (Stage) windows0AnchorPane.getScene().getWindow();
+           // Stage stage = (Stage) windows0AnchorPane.getScene().getWindow();
 
             //stageToShare = stage;
             stage.setScene(scene);

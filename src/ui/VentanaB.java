@@ -122,11 +122,21 @@ public class VentanaB {
 
         sesion.sendMessage(msg);
 
-        Platform.runLater(()->{
 
-        windows0.returnSearching(stage);
 
-        });
+        //Platform.exit();
+
+        windows0.returnToSearchin(stage);
+
+        System.out.println("Prueba");
+
     }
 
+    @FXML
+    void leaveGame(ActionEvent event)   {
+
+        sesion.sendMessage("leave");
+        Platform.exit();
+
+    }
 }

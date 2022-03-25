@@ -2,7 +2,7 @@ package model;
 
 public class Player {
 
-    private static Player instance;
+    //private static Player instance;
 
     private String type;
 
@@ -10,6 +10,7 @@ public class Player {
 
     //private int playedGames;
 
+    /*
     public static synchronized Player getInstance(String name){
 
         if(instance==null){
@@ -19,7 +20,9 @@ public class Player {
         return instance;
 
     }
-    private Player(String name){
+    *
+     */
+    public Player(String name){
 
         this.name = name;
 
