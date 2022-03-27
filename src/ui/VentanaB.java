@@ -126,16 +126,32 @@ public class VentanaB {
 
         //Platform.exit();
 
-        windows0.returnToSearchin(stage);
+        Platform.runLater(()-> {
 
-        System.out.println("Prueba");
+           // windows0.returnToSearchin(stage);
+
+            stage.close();
+            windows0.returnToSearchin(stage);
+        });
+
+
+
+        //System.out.println("Prueba");
 
     }
 
     @FXML
     void leaveGame(ActionEvent event)   {
 
-        sesion.sendMessage("leave");
+        Message m = new Message("leave");
+
+        Gson gson = new Gson();
+
+        String msg = gson.toJson(m);
+
+        //sesion.sendMessage(msg);
+
+        sesion.sendMessage("msg");
         Platform.exit();
 
     }

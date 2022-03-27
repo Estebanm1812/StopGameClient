@@ -151,6 +151,9 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
         //sesion.start();
     }
     public void returnToSearchin(Stage stage){
+
+
+
         FXMLLoader fxmload = new FXMLLoader(getClass().getResource("VentanaDeCargar.fxml"));
 
         Parent loadingPane;
@@ -200,6 +203,7 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
     @Override
     public void onMessageReceived() {
+
 
         sesion.msg = null;
 
