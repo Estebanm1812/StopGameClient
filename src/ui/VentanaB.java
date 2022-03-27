@@ -111,6 +111,7 @@ public class VentanaB {
         }
     }
 
+    /*
     @FXML
     void finishGame(ActionEvent event) {
 
@@ -130,7 +131,7 @@ public class VentanaB {
 
            // windows0.returnToSearchin(stage);
 
-            stage.close();
+            //stage.close();
             windows0.returnToSearchin(stage);
         });
 
@@ -139,7 +140,7 @@ public class VentanaB {
         //System.out.println("Prueba");
 
     }
-
+*/
     @FXML
     void leaveGame(ActionEvent event)   {
 
@@ -151,7 +152,7 @@ public class VentanaB {
 
         //sesion.sendMessage(msg);
 
-        sesion.sendMessage("msg");
+        sesion.sendMessage(msg);
         Platform.exit();
 
     }

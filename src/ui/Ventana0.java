@@ -153,6 +153,7 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
     public void returnToSearchin(Stage stage){
 
 
+        System.out.println("Tiene que entrar a aqui");
 
         FXMLLoader fxmload = new FXMLLoader(getClass().getResource("VentanaDeCargar.fxml"));
 
