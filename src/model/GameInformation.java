@@ -16,6 +16,22 @@ public class GameInformation {
 
     private int rivalPoints;
 
+    private int ownNamePoints;
+
+    private int ownAnimalPoints;
+
+    private int ownCountryPoints;
+
+    private int ownThingPoint;
+
+    private int rivalNamePoints;
+
+    private int rivalAnimalPoints;
+
+    private int rivalCountryPoints;
+
+    private int rivalThingPoints;
+
     public GameInformation(Player rival,String letter,Player self){
         this.rival = rival;
         this.letter = letter;
@@ -72,11 +88,11 @@ public class GameInformation {
 
             if(ownName.isEmpty() && rivalName.isEmpty()==false){
 
-                rivalPoints +=100;
+                rivalNamePoints +=100;
 
             }else if(ownName.isEmpty()==false && rivalName.isEmpty()){
 
-                ownPoints += 100;
+                ownNamePoints += 100;
             }else{
 
             }
@@ -84,12 +100,12 @@ public class GameInformation {
 
         }else if(ownName.equals(rivalName)){
 
-            rivalPoints += 50;
-            ownPoints += 50;
+            rivalNamePoints += 50;
+            ownNamePoints += 50;
         }else{
 
-            rivalPoints += 100;
-            ownPoints += 100;
+            rivalNamePoints += 100;
+            ownNamePoints += 100;
 
         }
         String ownAnimal = ownAnswer.getAnimal();
@@ -100,11 +116,11 @@ public class GameInformation {
 
             if(ownAnimal.isEmpty() && rivalAnimal.isEmpty()==false){
 
-                rivalPoints +=100;
+                rivalAnimalPoints +=100;
 
             }else if(ownAnimal.isEmpty()==false && rivalAnimal.isEmpty()){
 
-                ownPoints += 100;
+                ownAnimalPoints += 100;
             }else{
 
             }
@@ -112,12 +128,12 @@ public class GameInformation {
 
         }else if(ownAnimal.equals(rivalAnimal)){
 
-            rivalPoints += 50;
-            ownPoints += 50;
+            rivalAnimalPoints += 50;
+            ownAnimalPoints += 50;
         }else{
 
-            rivalPoints += 100;
-            ownPoints += 100;
+            rivalAnimalPoints += 100;
+            ownAnimalPoints += 100;
 
         }
         String ownCity = ownAnswer.getCity_country();
@@ -128,11 +144,11 @@ public class GameInformation {
 
             if(ownCity.isEmpty() && rivalCity.isEmpty()==false){
 
-                rivalPoints +=100;
+                rivalCountryPoints +=100;
 
             }else if(ownCity.isEmpty()==false && rivalCity.isEmpty()){
 
-                ownPoints += 100;
+                ownCountryPoints += 100;
             }else{
 
             }
@@ -140,12 +156,12 @@ public class GameInformation {
 
         }else if(ownCity.equals(rivalCity)){
 
-            rivalPoints += 50;
-            ownPoints += 50;
+            rivalCountryPoints += 50;
+            ownCountryPoints += 50;
         }else{
 
-            rivalPoints += 100;
-            ownPoints += 100;
+            rivalCountryPoints += 100;
+            ownCountryPoints += 100;
 
         }
         String ownThing = ownAnswer.getThing();
@@ -156,11 +172,11 @@ public class GameInformation {
 
             if(ownThing.isEmpty() && rivalThing.isEmpty()==false){
 
-                rivalPoints +=100;
+                rivalThingPoints +=100;
 
             }else if(ownThing.isEmpty()==false && rivalThing.isEmpty()){
 
-                ownPoints += 100;
+                ownThingPoint += 100;
             }else{
 
             }
@@ -168,15 +184,17 @@ public class GameInformation {
 
         }else if(ownThing.equals(rivalThing)){
 
-            rivalPoints += 50;
-            ownPoints += 50;
+            rivalThingPoints += 50;
+            ownThingPoint += 50;
         }else{
 
-            rivalPoints += 100;
-            ownPoints += 100;
+            rivalThingPoints += 100;
+            ownThingPoint += 100;
 
         }
 
+        rivalPoints = rivalAnimalPoints+rivalThingPoints+rivalNamePoints+rivalCountryPoints;
+        ownPoints = ownAnimalPoints+ownNamePoints+ownCountryPoints+ownThingPoint;
 
     }
 
@@ -186,5 +204,37 @@ public class GameInformation {
 
     public int getRivalPoints() {
         return rivalPoints;
+    }
+
+    public int getOwnNamePoints() {
+        return ownNamePoints;
+    }
+
+    public int getOwnAnimalPoints() {
+        return ownAnimalPoints;
+    }
+
+    public int getOwnCountryPoints() {
+        return ownCountryPoints;
+    }
+
+    public int getOwnThingPoint() {
+        return ownThingPoint;
+    }
+
+    public int getRivalNamePoints() {
+        return rivalNamePoints;
+    }
+
+    public int getRivalAnimalPoints() {
+        return rivalAnimalPoints;
+    }
+
+    public int getRivalCountryPoints() {
+        return rivalCountryPoints;
+    }
+
+    public int getRivalThingPoints() {
+        return rivalThingPoints;
     }
 }

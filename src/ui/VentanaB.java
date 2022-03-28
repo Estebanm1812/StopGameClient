@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Answer;
 import model.GameInformation;
@@ -89,21 +90,58 @@ public class VentanaB {
             stage.show();
             game.calculatePoints();
 
-            ownNameResult.setText(game.getOwnAnswer().getName_lastName());
-            ownAnimalResult.setText(game.getOwnAnswer().getAnimal());
-            ownLocationResult.setText(game.getOwnAnswer().getCity_country());
-            ownObjectResult.setText(game.getOwnAnswer().getThing());
+            ownNameResult.setText(game.getOwnAnswer().getName_lastName() + " (" + game.getOwnNamePoints() + ")");
+            ownAnimalResult.setText(game.getOwnAnswer().getAnimal() + " (" + game.getOwnAnimalPoints() + ")");
+            ownLocationResult.setText(game.getOwnAnswer().getCity_country() + " (" + game.getOwnCountryPoints() + ")");
+            ownObjectResult.setText(game.getOwnAnswer().getThing() + " (" + game.getOwnThingPoint() + ")");
 
-            opponentAnimalResult.setText(game.getRivalAnswer().getAnimal());
-            opponentNameResult.setText(game.getRivalAnswer().getName_lastName());
-            opponentLocationResult.setText(game.getRivalAnswer().getCity_country());
-            opponentObjectResult.setText(game.getRivalAnswer().getThing());
+            opponentAnimalResult.setText(game.getRivalAnswer().getAnimal() + " (" + game.getRivalNamePoints() + ")");
+            opponentNameResult.setText(game.getRivalAnswer().getName_lastName() + " (" + game.getRivalAnimalPoints() + ")");
+            opponentLocationResult.setText(game.getRivalAnswer().getCity_country() + " (" + game.getRivalCountryPoints() + ")");
+            opponentObjectResult.setText(game.getRivalAnswer().getThing() + " (" + game.getRivalThingPoints() + ")");
 
             youLabel.setText(game.getSelf().getName());
             opponentLabel.setText(game.getRival().getName());
 
             ownPoints.setText(String.valueOf(game.getOwnPoints()));
             rivalPoints.setText(String.valueOf(game.getRivalPoints()));
+
+            if(game.getOwnPoints()>game.getRivalPoints()) {
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("winnerScreen.fxml"));
+                fxmlLoader.setController(this);
+                Parent root = fxmlLoader.load();
+                Scene scene2 = new Scene(root);
+                Stage stage2 = new Stage();
+                stage2.initModality(Modality.WINDOW_MODAL);
+                //stage2.initOwner(windows0.loadingAnchorPane.getScene().getWindow());
+                stage2.setScene(scene2);
+                stage2.show();
+            }else if(game.getOwnPoints()<game.getRivalPoints()){
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("looserScreen.fxml"));
+                fxmlLoader.setController(this);
+                Parent root = fxmlLoader.load();
+                Scene scene2 = new Scene(root);
+                Stage stage2 = new Stage();
+                stage2.initModality(Modality.WINDOW_MODAL);
+                //stage2.initOwner(windows0.loadingAnchorPane.getScene().getWindow());
+                stage2.setScene(scene2);
+                stage2.show();
+
+
+            }else{
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("tieScreen.fxml"));
+                fxmlLoader.setController(this);
+                Parent root = fxmlLoader.load();
+                Scene scene2 = new Scene(root);
+                Stage stage2 = new Stage();
+                stage2.initModality(Modality.WINDOW_MODAL);
+                //stage2.initOwner(windows0.loadingAnchorPane.getScene().getWindow());
+                stage2.setScene(scene2);
+                stage2.show();
+            }
 
 
         } catch (IOException e) {
