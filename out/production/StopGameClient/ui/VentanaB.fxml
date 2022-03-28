@@ -42,6 +42,6 @@
       <Label layoutX="40.0" layoutY="363.0" text="Puntos" />
       <Label fx:id="ownPoints" layoutX="275.0" layoutY="363.0" text="Texto (100)" />
       <Label fx:id="rivalPoints" layoutX="432.0" layoutY="363.0" text="Texto (50)" />
-      <Button layoutX="280.0" layoutY="406.0" mnemonicParsing="false" onAction="#leaveGame" text="Salir" />
+      <Button layoutX="287.0" layoutY="398.0" mnemonicParsing="false" onAction="#leaveGame" text="Salir" />
     </children>
 </AnchorPane>
