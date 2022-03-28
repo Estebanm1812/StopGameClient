@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -97,6 +98,12 @@ public class VentanaA {
 
         if(name.isEmpty() || animal.isEmpty() || city.isEmpty() || thing.isEmpty()) {
 
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("STOP");
+            alert.setHeaderText("Annoucement");
+            alert.setContentText("Todos los campos tiene que tener informacion");
+            //initializeAllPlayersTableview();
+            alert.showAndWait();
 
         }else{
 
