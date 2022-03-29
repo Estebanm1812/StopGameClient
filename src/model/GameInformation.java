@@ -2,6 +2,8 @@ package model;
 
 public class GameInformation {
 
+    private static GameInformation instance;
+
     private Player rival;
 
     private Answer ownAnswer;
@@ -32,7 +34,18 @@ public class GameInformation {
 
     private int rivalThingPoints;
 
-    public GameInformation(Player rival,String letter,Player self){
+    public static GameInformation getInstance(Player rival, String letter, Player self){
+
+        if(instance==null){
+
+            instance = new GameInformation(rival,letter,self);
+
+        }
+        return instance;
+
+    }
+
+    private GameInformation(Player rival,String letter,Player self){
         this.rival = rival;
         this.letter = letter;
         this.self = self;

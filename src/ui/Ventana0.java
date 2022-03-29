@@ -246,7 +246,7 @@ public class Ventana0 implements OnSearchingListener, OnMessageReceived {
 
                         Player rival = gson.fromJson(parts[0], Player.class);
 
-                        game = new GameInformation(rival, parts[1],sesion.getPlayer());
+                        game = GameInformation.getInstance(rival, parts[1],sesion.getPlayer());
 
                         //System.out.println(parts[0]);
 
